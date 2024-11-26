@@ -1,0 +1,8 @@
+
+
+http://127.0.0.1:8000/auth/employee/login/
+http://127.0.0.1:8000/auth/employee/register/
+http://127.0.0.1:8000/auth/admin/login/
+http://127.0.0.1:8000/auth/admin/register/
+
+

@@ -1,0 +1,41 @@
+<!-- templates/main/leave_requests.html -->
+<!-- templates/main/leave_requests.html -->
+{% extends "main/header.html" %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.status == 'admin' %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h3>Leave Requests</h3>
+            <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary">Back</a>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                {% csrf_token %}
+                <table id="leave-requests-table" class="table">
+                    {% csrf_token %}
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+
+
+
+{% block extra_js %}
+<script src="{% static 'js/admin_request_leave.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,27 @@
+<header class="site-header" style="margin-bottom: 5px">
+    <nav class="navbar navbar-expand-md navbar-color">
+        <div class="container">
+            <button aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler ml-auto float-right btncolor" data-target="#navbarToggle" data-toggle="collapse" type="button">
+                <i class="fas fa-bars fa-2x"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+                <div class="navbar-nav">
+                    {% if user.is_authenticated %}
+                        {% if user.is_superuser %}
+                            <a class="nav-item nav-link" href="admin/">Admin</a>
+                        {% endif %}
+                        <a class="nav-item nav-link" href="{% url 'profile' user.username %}">
+                            {{user.username}} <i class="fas fa-user"></i>
+                        </a>
+                        <a class="nav-item nav-link" href="{% url 'logout' %}">
+                            Log out <i class="fas fa-sign-out-alt"></i>
+                        </a>
+                    {% else %}
+                       
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

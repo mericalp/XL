@@ -1,0 +1,29 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="content-section">
+    <form id="adminLoginForm" method="POST" data-action="{% url 'auth_api' action='login' %}">
+        {% csrf_token %}
+        <input type="hidden" name="user_type" value="employee">
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Employee Login</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Login as Employee</button>
+        </div>
+    </form>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+            Need an Employee account? <a href="{% url 'register' %}">Register here</a>
+        </small>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{% static 'js/auth.js' %}"></script>
+{% endblock %}

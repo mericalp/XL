@@ -1,0 +1,61 @@
+<!-- Update main/admin_dashboard.html -->
+{% extends "main/header.html" %}
+{% load static %}
+
+{% block content %}
+{% if user.is_authenticated and user.status == 'admin' %}
+    <div class="container">
+        <h2>Admin Dashboard</h2>
+        
+        <!-- Navigation Buttons -->
+        <div class="mb-4">
+            <a href="{% url 'leave_requests' %}" class="btn btn-primary mr-2">View Leave Requests</a>
+            <a href="{% url 'monthly_reports' %}" class="btn btn-primary">View Monthly Reports</a>
+        </div>
+        
+        <!-- Attendance Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Today's Attendance</h3>
+            </div>
+            <div class="card-body">
+                <table id="attendance-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Employee</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Late Duration</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/admin_dashboard.js' %}"></script>
+<script>
+    const socket = new WebSocket('ws://localhost:8000/ws/notifications/');
+
+    // When a message is received, show a notification
+    socket.onmessage = function (event) {
+        const data = JSON.parse(event.data);
+        alert(data.message); // Display the notification message
+    };
+
+    // Handle WebSocket connection close
+    socket.onclose = function (event) {
+        console.error('WebSocket closed unexpectedly');
+    };
+
+    // Optional: Log WebSocket errors
+    socket.onerror = function (error) {
+        console.error('WebSocket Error:', error);
+    };
+</script>
+
+{% endblock %}

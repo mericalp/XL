@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Late Arrival Notification</title>
+</head>
+<body>
+    <h2>Late Arrival Notification</h2>
+    <p>Dear {{ admin.username }},</p>
+    <p>
+        The user <strong>{{ user.username }}</strong> has arrived late on {{ date }}. 
+        They were <strong>{{ minutes }}</strong> minutes late.
+    </p>
+    <p>Please take the necessary actions.</p>
+    <p>Best regards,<br>Attendance Management System</p>
+</body>
+</html>
